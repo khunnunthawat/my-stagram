@@ -8,6 +8,7 @@
   npm i class-transformer
   npm i change-case
   npm i bcrypt ซ้อน password
+  npm i @nestjs/jwt @nestjs/passport passport passport-jwt
 
   nest create :
   nest g module user --no-spec
@@ -19,6 +20,7 @@
   nest g mo comment --no-spec
   nest g s comment --no-spec
   nest g co comment --no-spec
+  nest g gu my --no-spec
 ###
 
 ###

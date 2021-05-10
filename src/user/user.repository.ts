@@ -11,7 +11,7 @@ import * as bcrypt from 'bcrypt';
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
   // SingUp
-  async createUser(userCredentialDto: UserCredentialDto) {
+  async createUser(userCredentialDto: UserCredentialDto): Promise<User> {
     const { username, password } = userCredentialDto;
     const salt = bcrypt.genSaltSync(); // ทำการซ่อน password
 
@@ -43,7 +43,7 @@ export class UserRepository extends Repository<User> {
     if (user && (await user.verifyPassword(password))) {
       return user.username;
     } else {
-      throw new UnauthorizedException('Error, Invalid Username or Password!');
+      throw new UnauthorizedException('Invalid username or password');
     }
   }
 
