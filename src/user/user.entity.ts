@@ -10,6 +10,7 @@ import {
   Unique,
   UpdateDateColumn,
 } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 
 @Entity()
 @Unique(['username'])
@@ -34,4 +35,13 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Comments, (comment) => comment.user, { eager: true })
   comment: Comments;
+
+  // ตัวเช็ค password ของ user
+  async verifyPassword(password) {
+    const hashPassword = await password;
+    // console.log(this.password === hashPassword);
+    // console.log(this.password, hashPassword);
+    // console.log(typeof this.password, typeof hashPassword);
+    return this.password === hashPassword;
+  }
 }

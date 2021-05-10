@@ -13,20 +13,21 @@ import { User } from './user.entity';
 export class UserController {
   constructor(private userService: UserService) {}
 
-  @Post('/singup')
+  @Post('/signup')
   @UsePipes(ValidationPipe)
   singUp(@Body() userCredentialDto: UserCredentialDto): Promise<User> {
-    console.log('singUp : ', userCredentialDto);
-    return this.userService.singUp(userCredentialDto);
+    console.log('signUp : ', userCredentialDto);
+    return this.userService.signUp(userCredentialDto);
   }
 
-  // @Post('/singin')
-  // singIn(@Body() userCredentialDto: UserCredentialDto) {
-  //   console.log('singIn : ', userCredentialDto);
-  // }
+  @Post('/signin')
+  singIn(@Body() userCredentialDto: UserCredentialDto) {
+    // console.log('signIn : ', userCredentialDto);
+    return this.userService.signIn(userCredentialDto);
+  }
 
-  // @Post('/singout')
-  // singOut(@Body() userCredentialDto: UserCredentialDto) {
-  //   console.log('singOut : ', userCredentialDto);
+  // @Post('/signout')
+  // signOut(@Body() userCredentialDto: UserCredentialDto) {
+  //   console.log('signOut : ', userCredentialDto);
   // }
 }

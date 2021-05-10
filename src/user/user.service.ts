@@ -10,11 +10,13 @@ export class UserService {
     @InjectRepository(UserRepository) private userRepository: UserRepository,
   ) {}
 
-  singUp(userCredentialDto: UserCredentialDto): Promise<User> {
+  signUp(userCredentialDto: UserCredentialDto): Promise<User> {
     return this.userRepository.createUser(userCredentialDto);
   }
 
-  // signIn(userCredentialDto: UserCredentialDto) {}
+  signIn(userCredentialDto: UserCredentialDto) {
+    return this.userRepository.verifyUserPassword(userCredentialDto);
+  }
 
   // singOut(userCredentialDto: UserCredentialDto) {}
 }
