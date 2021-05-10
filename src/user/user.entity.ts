@@ -17,7 +17,7 @@ export class User extends BaseEntity {
   @PrimaryGeneratedColumn() // เหมือน ai ใน sql
   id: number;
 
-  @Column() // ทำการสร้างใน table
+  @Column()
   username: string;
 
   @Column()

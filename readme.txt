@@ -7,6 +7,7 @@
   npm i class-validator
   npm i class-transformer
   npm i change-case
+  npm i bcrypt ซ้อน password
 
   nest create :
   nest g module user --no-spec
