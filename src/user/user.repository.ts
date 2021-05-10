@@ -6,15 +6,21 @@ import {
   ConflictException,
   InternalServerErrorException,
 } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
   // SingUp
-  async createUser(userCredentialDto: UserCredentialDto): Promise<User> {
+  async createUser(userCredentialDto: UserCredentialDto) {
     const { username, password } = userCredentialDto;
+    const salt = bcrypt.genSaltSync(); // ทำการซ่อน password
+
     const user = new User();
     user.username = username;
-    user.password = password;
+    user.salt = salt;
+    // user.password = password;
+    user.password = await this.hashPassword(password, salt); // ทำการไปเรียกใช้ function ข้างล่าง
+
     try {
       await user.save();
     } catch (error) {
@@ -39,5 +45,10 @@ export class UserRepository extends Repository<User> {
     } else {
       throw new UnauthorizedException('Error, Invalid Username or Password!');
     }
+  }
+
+  // ซ่อนรหัส
+  async hashPassword(password: string, salt: string) {
+    return bcrypt.hash(password, salt);
   }
 }

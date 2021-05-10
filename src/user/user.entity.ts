@@ -24,6 +24,9 @@ export class User extends BaseEntity {
   @Column()
   password: string;
 
+  @Column()
+  salt: string;
+
   @CreateDateColumn()
   created: Date;
 
@@ -38,7 +41,8 @@ export class User extends BaseEntity {
 
   // ตัวเช็ค password ของ user
   async verifyPassword(password) {
-    const hashPassword = await password;
+    // const hashPassword = await password;
+    const hashPassword = await bcrypt.hash(password, this.salt);
     // console.log(this.password === hashPassword);
     // console.log(this.password, hashPassword);
     // console.log(typeof this.password, typeof hashPassword);
