@@ -48,8 +48,6 @@ export class PostsService {
     const result = await this.postsRepository.delete({ id, userId: user.id });
     if (result.affected === 0) {
       throw new NotFoundException(`Post with id:${id} is not found!`);
-    } else {
-      return found;
     }
   }
 }
