@@ -21,20 +21,12 @@ export class PostsService {
 
   getPost(user: UserEntity) {
     return this.postsRepository.find();
-    // if (user) {
-    //   const qurey = this.postsRepository.createQueryBuilder('user_entity'); // ทำการเรียกใช้ methoad createQueryBuilder แล้วตามด้วยชื่อ Table ใน database
-    //   qurey.andWhere('user.username LIKE :user', {
-    //     keyword: `%${user}%`,
-    //   }); // filter หา keyword โดยการใช้ qurey.andWhere ในการหาคำ
-    //   return qurey.getMany(); // .getMany() เป็นการเรียกใช้ข้อมูลที่ป้อนก่อนหน้านี้
-    // } else {
-    //   return this.postsRepository.find();
-    // }
   }
 
   async getPostById(id: number, user: UserEntity) {
     const found = await this.postsRepository.findOne({
       where: { id, userId: user.id },
+      // id = id ของ post, userId = user id ของคนที่สร้าง post, user.id จากการกด signIn เข้ามาตอนแรก
     });
     if (!found) {
       throw new NotFoundException(`Product id:${id} is not found!`);
@@ -45,7 +37,6 @@ export class PostsService {
   async updatePostById(id: number, desc: string, user: UserEntity) {
     const posts = await this.getPostById(id, user);
     posts.desc = desc;
-    posts.user = user;
     await posts.save();
     return posts;
   }
@@ -57,6 +48,8 @@ export class PostsService {
     const result = await this.postsRepository.delete({ id, userId: user.id });
     if (result.affected === 0) {
       throw new NotFoundException(`Post with id:${id} is not found!`);
+    } else {
+      return found;
     }
   }
 }

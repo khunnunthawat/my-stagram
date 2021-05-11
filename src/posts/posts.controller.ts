@@ -8,10 +8,9 @@ import {
   UploadedFile,
   UseInterceptors,
   Get,
-  Put,
   Param,
   Delete,
-  Query,
+  Patch,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { PostsService } from './posts.service';
@@ -20,8 +19,6 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { GetUsername } from 'src/user/get-username.decorator';
 import { PostsEntity } from './posts.entity';
 import { UserEntity } from 'src/user/user.entity';
-import * as fsExtra from 'fs-extra';
-import { extname } from 'path';
 
 @Controller('posts')
 @UseGuards(AuthGuard())
@@ -57,35 +54,15 @@ export class PostsController {
     return this.postsService.getPostById(id, user);
   }
 
-  @Put('/:id/desc')
+  // Update_Post
+  @Patch('/:id/desc')
   async UpdatePostById(
     @Param('id') id: number,
-    @Body('desc') text: string,
+    @Body('desc') desc: string,
     @GetUsername() user: UserEntity,
   ) {
-    return await this.postsService.updatePostById(id, text, user);
+    return await this.postsService.updatePostById(id, desc, user);
   }
-
-  // Update_Post
-  // @Put('/:id')
-  // @UseInterceptors(FileInterceptor('image'))
-  // async UpdatePostById(
-  //   @UploadedFile() file,
-  //   @Param('id') id: number,
-  //   @Body() createPostsDto: CreatePostsDto,
-  //   @GetUsername() user: UserEntity,
-  // ): Promise<PostsEntity> {
-  //   createPostsDto.userId = user.id;
-  //   const posts = await this.postsService.updatePost(id, createPostsDto);
-  //   if (file) {
-  //     posts.userId = user.id;
-  //     const imageFile = posts.id + extname(file.originalname);
-  //     fsExtra.move(file.path, `upload/${imageFile}`);
-  //     posts.image = imageFile;
-  //     await posts.save();
-  //   }
-  //   return posts;
-  // }
 
   // Delete_Post
   @Delete('/:id')

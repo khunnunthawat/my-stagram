@@ -1,4 +1,17 @@
 ###
+  [GET] /posts/:post_id
+  [POST] /posts
+  [PATCH] /posts/:post_id
+  [DELETE] /posts/:post_id
+  [GET] /comments?post_id=:post_id
+  [POST] /comments
+  [PATCH] /comments/:comment_id
+  [DELETE] /comments/:comment_id
+  [GET] /users/:user_id
+  [GET] /users/:user_id/posts
+###
+
+###
   npm install :
   npm i @nestjs/typeorm
   npm i typeorm --save
