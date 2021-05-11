@@ -9,6 +9,9 @@
   npm i change-case
   npm i bcrypt ซ้อน password
   npm i @nestjs/jwt @nestjs/passport passport passport-jwt
+  npm i fs-extra
+  npm i multer
+  npm i -D @types/multer
 
   nest create :
   nest g module user --no-spec
@@ -73,3 +76,29 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   https://www.codota.com/code/javascript/functions/passport-jwt/fromAuthHeaderAsBearerToken
   npm i @nestjs/jwt @nestjs/passport passport passport-jwt
 ###
+
+
+  // @Post('/upload')
+  // @UseInterceptors(
+  //   FileInterceptor('image', {
+  //     storage: diskStorage({
+  //       destination: './upload',
+  //     }),
+  //   }),
+  // )
+  // @UsePipes(ValidationPipe)
+  // async addPosts(
+  //   @UploadedFile() file,
+  //   @Body() createPostsDto: CreatePostsDto,
+  //   @GetUsername() user: UserEntity,
+  // ): Promise<PostsEntity> {
+  //   createPostsDto.userId = user.id;
+  //   // return this.postsService.createPosts(createPostsDto);
+  //   const posts = await this.postsService.createPosts(createPostsDto);
+  //   posts.userId = user.id;
+  //   const imageFile = posts.id + extname(file.originalname);
+  //   fsExtra.move(file.path, `upload/${imageFile}`);
+  //   posts.image = imageFile;
+  //   await posts.save();
+  //   return posts;
+  // }

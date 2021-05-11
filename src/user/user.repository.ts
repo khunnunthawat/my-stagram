@@ -1,5 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { User } from './user.entity';
+import { UserEntity } from './user.entity';
 import { UserCredentialDto } from './dto/user-credential.ato';
 import { UnauthorizedException } from '@nestjs/common';
 import {
@@ -8,14 +8,14 @@ import {
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 
-@EntityRepository(User)
-export class UserRepository extends Repository<User> {
+@EntityRepository(UserEntity)
+export class UserRepository extends Repository<UserEntity> {
   // SingUp
-  async createUser(userCredentialDto: UserCredentialDto): Promise<User> {
+  async createUser(userCredentialDto: UserCredentialDto): Promise<UserEntity> {
     const { username, password } = userCredentialDto;
     const salt = bcrypt.genSaltSync(); // ทำการซ่อน password
 
-    const user = new User();
+    const user = new UserEntity();
     user.username = username;
     user.salt = salt;
     // user.password = password;

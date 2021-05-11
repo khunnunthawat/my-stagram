@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserCredentialDto } from './dto/user-credential.ato';
-import { User } from './user.entity';
+import { UserEntity } from './user.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUsername } from './get-username.decorator';
 
@@ -20,7 +20,7 @@ export class UserController {
 
   @Post('/signup')
   @UsePipes(ValidationPipe)
-  singUp(@Body() userCredentialDto: UserCredentialDto): Promise<User> {
+  singUp(@Body() userCredentialDto: UserCredentialDto): Promise<UserEntity> {
     console.log('signUp : ', userCredentialDto);
     return this.userService.signUp(userCredentialDto);
   }

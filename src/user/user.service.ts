@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserCredentialDto } from './dto/user-credential.ato';
-import { User } from './user.entity';
+import { UserEntity } from './user.entity';
 import { UserRepository } from './user.repository';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class UserService {
     private jwtService: JwtService,
   ) {}
 
-  signUp(userCredentialDto: UserCredentialDto): Promise<User> {
+  signUp(userCredentialDto: UserCredentialDto): Promise<UserEntity> {
     return this.userRepository.createUser(userCredentialDto);
   }
 

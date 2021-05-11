@@ -1,4 +1,4 @@
-import { User } from '../user/user.entity';
+import { UserEntity } from '../user/user.entity';
 import {
   BaseEntity,
   Column,
@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Posts extends BaseEntity {
+export class PostsEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -26,6 +26,9 @@ export class Posts extends BaseEntity {
   @UpdateDateColumn()
   updated: Date;
 
-  @ManyToOne(() => User, (user) => user.post, { eager: false })
-  user: User;
+  @Column()
+  userId: number;
+
+  @ManyToOne(() => UserEntity, (user) => user.post, { eager: false })
+  user: UserEntity;
 }

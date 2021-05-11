@@ -1,5 +1,5 @@
-import { Posts } from '../posts/posts.entity';
-import { Comments } from 'src/comments/comments.entity';
+import { PostsEntity } from '../posts/posts.entity';
+import { CommentsEntity } from 'src/comments/comments.entity';
 import {
   BaseEntity,
   Column,
@@ -14,7 +14,7 @@ import * as bcrypt from 'bcrypt';
 
 @Entity()
 @Unique(['username'])
-export class User extends BaseEntity {
+export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn() // เหมือน ai ใน sql
   id: number;
 
@@ -33,11 +33,11 @@ export class User extends BaseEntity {
   @UpdateDateColumn()
   updated: Date;
 
-  @OneToMany(() => Posts, (post) => post.user, { eager: true })
-  post: Posts;
+  @OneToMany(() => PostsEntity, (post) => post.user, { eager: true })
+  post: PostsEntity;
 
-  @OneToMany(() => Comments, (comment) => comment.user, { eager: true })
-  comment: Comments;
+  @OneToMany(() => CommentsEntity, (comment) => comment.user, { eager: true })
+  comment: CommentsEntity;
 
   // ตัวเช็ค password ของ user
   async verifyPassword(password) {

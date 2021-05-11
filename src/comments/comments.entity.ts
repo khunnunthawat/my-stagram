@@ -1,4 +1,4 @@
-import { User } from '../user/user.entity';
+import { UserEntity } from '../user/user.entity';
 import {
   BaseEntity,
   Column,
@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Comments extends BaseEntity {
+export class CommentsEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -23,6 +23,6 @@ export class Comments extends BaseEntity {
   @UpdateDateColumn()
   updated: Date;
 
-  @ManyToOne(() => User, (user) => user.comment, { eager: false })
-  user: User;
+  @ManyToOne(() => UserEntity, (user) => user.comment, { eager: false })
+  user: UserEntity;
 }
