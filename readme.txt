@@ -78,6 +78,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
 ###
 
 ###
+  import { Post as post } from './post.entity';  ใช้ as แทนในการเรียกใช้คำหลัง
   // @Post('/upload')
   // @UseInterceptors(
   //   FileInterceptor('image', {
