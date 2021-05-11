@@ -42,9 +42,9 @@ export class PostsService {
     return found;
   }
 
-  async updatePostById(id: number, text: string, user: UserEntity) {
+  async updatePostById(id: number, desc: string, user: UserEntity) {
     const posts = await this.getPostById(id, user);
-    posts.desc = text;
+    posts.desc = desc;
     posts.user = user;
     await posts.save();
     return posts;
