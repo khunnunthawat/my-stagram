@@ -4,7 +4,7 @@ export class CreatePostsDto {
   @IsNotEmpty()
   desc: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   image: string;
 
   @IsOptional()

@@ -26,16 +26,9 @@ export class PostsController {
 
   @Post('/upload')
   @UseInterceptors(
-    FileInterceptor('file', {
+    FileInterceptor('image', {
       storage: diskStorage({
         destination: './upload',
-        filename: (req, file, cb) => {
-          const randomName = Array(32)
-            .fill(null)
-            .map(() => Math.round(Math.random() * 16).toString(16))
-            .join('');
-          return cb(null, `${randomName}${extname(file.originalname)}`);
-        },
       }),
     }),
   )
@@ -47,9 +40,12 @@ export class PostsController {
   ): Promise<PostsEntity> {
     createPostsDto.userId = user.id;
     // return this.postsService.createPosts(createPostsDto);
-    const posts = await this.postsService.createPosts(createPostsDto);
+    const posts = await this.postsService.createPosts(
+      createPostsDto,
+      file.filename,
+    );
     posts.userId = user.id;
-    const imageFile = posts.id + extname(file.filename);
+    const imageFile = posts.id + extname(file.originalname);
     fsExtra.move(file.path, `upload/${imageFile}`);
     posts.image = imageFile;
     await posts.save();

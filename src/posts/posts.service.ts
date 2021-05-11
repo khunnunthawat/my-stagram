@@ -10,7 +10,7 @@ export class PostsService {
     @InjectRepository(PostsEntity)
     private postsRepository: PostsEntityRepository,
   ) {}
-  async createPosts(createPostsDto: CreatePostsDto) {
-    return await this.postsRepository.createPost(createPostsDto);
+  async createPosts(createPostsDto: CreatePostsDto, filename: string) {
+    return await this.postsRepository.createPost(createPostsDto, filename);
   }
 }
