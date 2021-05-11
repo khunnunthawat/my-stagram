@@ -77,7 +77,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   npm i @nestjs/jwt @nestjs/passport passport passport-jwt
 ###
 
-
+###
   // @Post('/upload')
   // @UseInterceptors(
   //   FileInterceptor('image', {
@@ -94,7 +94,10 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   // ): Promise<PostsEntity> {
   //   createPostsDto.userId = user.id;
   //   // return this.postsService.createPosts(createPostsDto);
-  //   const posts = await this.postsService.createPosts(createPostsDto);
+  //   const posts = await this.postsService.createPosts(
+  //     createPostsDto,
+  //     file.filename,
+  //   );
   //   posts.userId = user.id;
   //   const imageFile = posts.id + extname(file.originalname);
   //   fsExtra.move(file.path, `upload/${imageFile}`);
@@ -102,3 +105,4 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   //   await posts.save();
   //   return posts;
   // }
+###

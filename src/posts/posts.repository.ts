@@ -7,7 +7,7 @@ export class PostsEntityRepository extends Repository<PostsEntity> {
     createPostsDto: CreatePostsDto,
     filename: string,
   ): Promise<PostsEntity> {
-    const { desc, image, userId } = createPostsDto;
+    const { desc, userId } = createPostsDto;
     const posts = new PostsEntity();
     posts.desc = desc;
     posts.image = filename;

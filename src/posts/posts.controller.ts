@@ -15,7 +15,6 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { GetUsername } from 'src/user/get-username.decorator';
 import { PostsEntity } from './posts.entity';
 // image
-import { diskStorage } from 'multer';
 import * as fsExtra from 'fs-extra';
 import { extname } from 'path';
 import { UserEntity } from 'src/user/user.entity';
@@ -25,13 +24,7 @@ export class PostsController {
   constructor(private postsService: PostsService) {}
 
   @Post('/upload')
-  @UseInterceptors(
-    FileInterceptor('image', {
-      storage: diskStorage({
-        destination: './upload',
-      }),
-    }),
-  )
+  @UseInterceptors(FileInterceptor('image'))
   @UsePipes(ValidationPipe)
   async addPosts(
     @UploadedFile() file,
