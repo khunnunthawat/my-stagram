@@ -36,6 +36,11 @@ export class UserController {
   //   console.log('signOut : ', userCredentialDto);
   // }
 
+  @Get()
+  getUser(@GetUsername() user: UserEntity) {
+    return this.userService.getUser(user);
+  }
+
   @Get('/test')
   @UseGuards(AuthGuard())
   test(@Req() req, @GetUsername() username) {

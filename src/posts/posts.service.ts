@@ -32,32 +32,31 @@ export class PostsService {
     // }
   }
 
-  async getPostByID(id: number) {
-    const found = await this.postsRepository.findOne(id);
+  async getPostById(id: number, user: UserEntity) {
+    const found = await this.postsRepository.findOne({
+      where: { id, userId: user.id },
+    });
     if (!found) {
-      throw new NotFoundException(`Product ${id} is not found!`);
+      throw new NotFoundException(`Product id:${id} is not found!`);
     }
     return found;
   }
 
-  async updatePost(
-    id: number,
-    createPostsDto: CreatePostsDto,
-    filename: string,
-  ) {
-    const posts = await this.getPostByID(id);
-    const { desc, userId } = createPostsDto;
-    posts.desc = desc;
-    posts.image = filename;
-    posts.userId = userId;
+  async updatePostById(id: number, text: string, user: UserEntity) {
+    const posts = await this.getPostById(id, user);
+    posts.desc = text;
+    posts.user = user;
     await posts.save();
     return posts;
   }
 
   async deletePost(id: number, user: UserEntity) {
-    const found = await this.getPostByID(id);
+    const found = await this.getPostById(id, user);
     const { image } = found;
     await fsExtra.remove(`upload/${image}`);
-    return await this.postsRepository.delete(id);
+    const result = await this.postsRepository.delete({ id, userId: user.id });
+    if (result.affected === 0) {
+      throw new NotFoundException(`Post with id:${id} is not found!`);
+    }
   }
 }

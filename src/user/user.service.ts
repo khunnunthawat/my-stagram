@@ -30,4 +30,8 @@ export class UserService {
     // return this.userRepository.verifyUserPassword(userCredentialDto);
   }
   // singOut(userCredentialDto: UserCredentialDto) {}
+
+  getUser(user: UserEntity) {
+    return this.userRepository.find();
+  }
 }

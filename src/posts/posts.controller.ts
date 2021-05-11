@@ -53,8 +53,17 @@ export class PostsController {
   }
 
   @Get('/:id')
-  getPostsById(@Param('id') id: number) {
-    return this.postsService.getPostByID(id);
+  getPostsById(@Param('id') id: number, @GetUsername() user: UserEntity) {
+    return this.postsService.getPostById(id, user);
+  }
+
+  @Put('/:id/text')
+  async UpdatePostById(
+    @Param('id') id: number,
+    @Body('text') text: string,
+    @GetUsername() user: UserEntity,
+  ) {
+    return await this.postsService.updatePostById(id, text, user);
   }
 
   // Update_Post
