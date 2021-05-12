@@ -1,5 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { CreatePostsDto } from './dto/create-posts-dto';
+import { CreatePostsDto } from './dto/create-posts.dto';
 import { PostsEntity } from './posts.entity';
 import { Express } from 'express';
 import * as fsExtra from 'fs-extra';

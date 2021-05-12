@@ -1,6 +1,6 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { UserEntity } from './user.entity';
-import { UserCredentialDto } from './dto/user-credential.ato';
+import { UserCredentialDto } from './dto/user-credential.dto';
 import { UnauthorizedException } from '@nestjs/common';
 import {
   ConflictException,

@@ -9,7 +9,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { UserCredentialDto } from './dto/user-credential.ato';
+import { UserCredentialDto } from './dto/user-credential.dto';
 import { UserEntity } from './user.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUsername } from './get-username.decorator';

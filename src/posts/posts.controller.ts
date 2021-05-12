@@ -14,7 +14,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { PostsService } from './posts.service';
-import { CreatePostsDto } from './dto/create-posts-dto';
+import { CreatePostsDto } from './dto/create-posts.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { GetUsername } from 'src/user/get-username.decorator';
 import { PostsEntity } from './posts.entity';
