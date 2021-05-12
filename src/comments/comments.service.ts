@@ -16,11 +16,10 @@ export class CommentsService {
     createCommentDto: CreateCommentDto,
     user: UserEntity,
   ): Promise<CommentEntity> {
-    console.log('service');
     return await this.commentRepository.createComment(createCommentDto, user);
   }
 
-  getComments(user: UserEntity): Promise<CommentEntity[]> {
+  getComments(): Promise<CommentEntity[]> {
     return this.commentRepository.find();
   }
 

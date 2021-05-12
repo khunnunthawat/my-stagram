@@ -32,9 +32,8 @@ export class UserService {
     return { token };
     // return this.userRepository.verifyUserPassword(userCredentialDto);
   }
-  // singOut(userCredentialDto: UserCredentialDto) {}
 
-  getUser(user: UserEntity): Promise<UserEntity[]> {
+  getUser(): Promise<UserEntity[]> {
     return this.userRepository.find();
   }
 

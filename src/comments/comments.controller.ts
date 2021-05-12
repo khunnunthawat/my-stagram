@@ -29,14 +29,13 @@ export class CommentsController {
     @Body() createCommentDto: CreateCommentDto,
     @GetUsername() user: UserEntity,
   ): Promise<CommentEntity> {
-    console.log('contro');
     return this.commentsService.createComment(createCommentDto, user);
   }
 
   // Get_Post
   @Get()
-  getComments(@GetUsername() user: UserEntity): Promise<CommentEntity[]> {
-    return this.commentsService.getComments(user);
+  getComments(): Promise<CommentEntity[]> {
+    return this.commentsService.getComments();
   }
 
   @Get('/:id')
@@ -47,7 +46,7 @@ export class CommentsController {
     return this.commentsService.getCommentById(id, user);
   }
 
-  @Get('/:post_id')
+  @Get('post/:post_id')
   getCommentByPostId(
     @Param('post_id') postId: number,
     @GetUsername() user: UserEntity,

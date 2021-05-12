@@ -14,7 +14,6 @@ export class CommentRepository extends Repository<CommentEntity> {
     comment.desc = desc;
     comment.user = user;
     comment.postId = postId;
-    console.log('repo');
     await comment.save();
 
     delete comment.user; // จะลบก่อนทำการ return

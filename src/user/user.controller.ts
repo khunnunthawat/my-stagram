@@ -4,7 +4,6 @@ import {
   Get,
   Param,
   Post,
-  Req,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -13,7 +12,6 @@ import { UserService } from './user.service';
 import { UserCredentialDto } from './dto/user-credential.dto';
 import { UserEntity } from './user.entity';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUsername } from './get-username.decorator';
 import { PostsEntity } from '../posts/posts.entity';
 
 @Controller('user')
@@ -35,8 +33,9 @@ export class UserController {
   }
 
   @Get()
-  getUser(@GetUsername() user: UserEntity): Promise<UserEntity[]> {
-    return this.userService.getUser(user);
+  @UseGuards(AuthGuard())
+  getUser(): Promise<UserEntity[]> {
+    return this.userService.getUser();
   }
 
   @Get('/:user_id')
@@ -49,9 +48,9 @@ export class UserController {
     return this.userService.getPostByUserId(id);
   }
 
-  @Get('/test')
-  @UseGuards(AuthGuard())
-  test(@Req() req, @GetUsername() username) {
-    return username;
-  }
+  // @Get('/test')
+  // @UseGuards(AuthGuard())
+  // test(@Req() req, @GetUsername() username) {
+  //   return username;
+  // }
 }
