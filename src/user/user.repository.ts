@@ -37,7 +37,9 @@ export class UserRepository extends Repository<UserEntity> {
   }
 
   // SingIn
-  async verifyUserPassword(userCredentialDto: UserCredentialDto) {
+  async verifyUserPassword(
+    userCredentialDto: UserCredentialDto,
+  ): Promise<string> {
     const { username, password } = userCredentialDto;
     const user = await this.findOne({ username });
     if (user && (await user.verifyPassword(password))) {
@@ -48,7 +50,7 @@ export class UserRepository extends Repository<UserEntity> {
   }
 
   // ซ่อนรหัส
-  async hashPassword(password: string, salt: string) {
+  async hashPassword(password: string, salt: string): Promise<string> {
     return bcrypt.hash(password, salt);
   }
 }
