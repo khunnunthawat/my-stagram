@@ -50,7 +50,7 @@ export class PostsController {
   }
 
   @Get('/:id')
-  getPostsById(@Param('id') id: number, @GetUsername() user: UserEntity) {
+  getPostById(@Param('id') id: number, @GetUsername() user: UserEntity) {
     return this.postsService.getPostById(id, user);
   }
 

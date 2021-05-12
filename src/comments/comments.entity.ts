@@ -1,4 +1,5 @@
 import { UserEntity } from '../user/user.entity';
+import { PostsEntity } from '../posts/posts.entity';
 import {
   BaseEntity,
   Column,
@@ -23,6 +24,18 @@ export class CommentsEntity extends BaseEntity {
   @UpdateDateColumn()
   updated: Date;
 
-  @ManyToOne(() => UserEntity, (user) => user.comment, { eager: false })
+  @Column()
+  userId: number;
+
+  @ManyToOne(() => UserEntity, (user) => user.comment, {
+    eager: false,
+    onDelete: 'CASCADE',
+  })
   user: UserEntity;
+
+  @ManyToOne(() => PostsEntity, (post) => post.comments, {
+    eager: false,
+    onDelete: 'CASCADE',
+  })
+  post: PostsEntity;
 }

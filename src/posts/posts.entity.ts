@@ -1,10 +1,12 @@
 import { UserEntity } from '../user/user.entity';
+import { CommentsEntity } from '../comments/comments.entity';
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -29,6 +31,13 @@ export class PostsEntity extends BaseEntity {
   @Column()
   userId: number;
 
-  @ManyToOne(() => UserEntity, (user) => user.post, { eager: false })
+  @ManyToOne(() => UserEntity, (user) => user.post, {
+    eager: false,
+  })
   user: UserEntity;
+
+  @OneToMany(() => CommentsEntity, (comment) => comment.post, {
+    eager: true,
+  })
+  comments: CommentsEntity;
 }
