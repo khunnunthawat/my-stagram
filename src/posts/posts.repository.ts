@@ -6,7 +6,7 @@ import * as fsExtra from 'fs-extra';
 import { extname } from 'path';
 import { UserEntity } from '../user/user.entity';
 @EntityRepository(PostsEntity)
-export class PostsEntityRepository extends Repository<PostsEntity> {
+export class PostsRepository extends Repository<PostsEntity> {
   async createPost(
     createPostsDto: CreatePostsDto,
     user: UserEntity,

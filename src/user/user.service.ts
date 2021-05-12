@@ -1,4 +1,4 @@
-import { UnauthorizedException } from '@nestjs/common';
+import { UnauthorizedException, NotFoundException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -33,5 +33,18 @@ export class UserService {
 
   getUser(user: UserEntity) {
     return this.userRepository.find();
+  }
+
+  async getUserById(id: number) {
+    const found = await this.userRepository.findOne({
+      where: { id },
+      // id = id ของ post, userId = user id ของคนที่สร้าง post, user.id จากการกด signIn เข้ามาตอนแรก
+    });
+    if (!found) {
+      throw new NotFoundException(`Product id:${id} is not found!`);
+    }
+    delete found.post;
+    delete found.comment;
+    return found;
   }
 }

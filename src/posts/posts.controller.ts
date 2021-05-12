@@ -26,7 +26,7 @@ export class PostsController {
   constructor(private postsService: PostsService) {}
 
   // Create_Posts
-  @Post('/upload')
+  @Post('/new')
   @UseInterceptors(FileInterceptor('image'))
   @UsePipes(ValidationPipe)
   async addPosts(
@@ -45,28 +45,34 @@ export class PostsController {
 
   // Get_Post
   @Get('/get')
-  getPosts(@GetUsername() user: UserEntity) {
+  getPosts(@GetUsername() user: UserEntity): Promise<PostsEntity[]> {
     return this.postsService.getPost(user);
   }
 
-  @Get('/:id')
-  getPostById(@Param('id') id: number, @GetUsername() user: UserEntity) {
+  @Get('/:post_id')
+  getPostById(
+    @Param('post_id') id: number,
+    @GetUsername() user: UserEntity,
+  ): Promise<PostsEntity> {
     return this.postsService.getPostById(id, user);
   }
 
   // Update_Post
-  @Patch('/:id/desc')
+  @Patch('edit/:post_id')
   async UpdatePostById(
-    @Param('id') id: number,
+    @Param('post_id') id: number,
     @Body('desc') desc: string,
     @GetUsername() user: UserEntity,
-  ) {
+  ): Promise<PostsEntity> {
     return await this.postsService.updatePostById(id, desc, user);
   }
 
   // Delete_Post
   @Delete('/:id')
-  deletePostsById(@Param('id') id: number, @GetUsername() user: UserEntity) {
+  deletePostsById(
+    @Param('id') id: number,
+    @GetUsername() user: UserEntity,
+  ): Promise<PostsEntity> {
     return this.postsService.deletePost(id, user);
   }
 }

@@ -1,5 +1,5 @@
 import { UserEntity } from '../user/user.entity';
-import { CommentsEntity } from '../comments/comments.entity';
+import { CommentEntity } from '../comments/comment.entity';
 import {
   BaseEntity,
   Column,
@@ -36,8 +36,8 @@ export class PostsEntity extends BaseEntity {
   })
   user: UserEntity;
 
-  @OneToMany(() => CommentsEntity, (comment) => comment.post, {
+  @OneToMany(() => CommentEntity, (comment) => comment.post, {
     eager: true,
   })
-  comments: CommentsEntity;
+  comments: CommentEntity;
 }

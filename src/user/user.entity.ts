@@ -1,5 +1,5 @@
 import { PostsEntity } from '../posts/posts.entity';
-import { CommentsEntity } from 'src/comments/comments.entity';
+import { CommentEntity } from 'src/comments/comment.entity';
 import {
   BaseEntity,
   Column,
@@ -36,8 +36,8 @@ export class UserEntity extends BaseEntity {
   @OneToMany(() => PostsEntity, (post) => post.user, { eager: true })
   post: PostsEntity;
 
-  @OneToMany(() => CommentsEntity, (comment) => comment.user, { eager: true })
-  comment: CommentsEntity;
+  @OneToMany(() => CommentEntity, (comment) => comment.user, { eager: true })
+  comment: CommentEntity;
 
   // ตัวเช็ค password ของ user
   async verifyPassword(password) {

@@ -11,7 +11,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class CommentsEntity extends BaseEntity {
+export class CommentEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -26,6 +26,9 @@ export class CommentsEntity extends BaseEntity {
 
   @Column()
   userId: number;
+
+  @Column()
+  postId: number;
 
   @ManyToOne(() => UserEntity, (user) => user.comment, {
     eager: false,

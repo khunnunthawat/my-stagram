@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Req,
   UseGuards,
@@ -31,14 +32,14 @@ export class UserController {
     return this.userService.signIn(userCredentialDto);
   }
 
-  // @Post('/signout')
-  // signOut(@Body() userCredentialDto: UserCredentialDto) {
-  //   console.log('signOut : ', userCredentialDto);
-  // }
-
   @Get()
   getUser(@GetUsername() user: UserEntity) {
     return this.userService.getUser(user);
+  }
+
+  @Get('/:user_id')
+  getUserById(@Param('user_id') id: number) {
+    return this.userService.getUserById(id);
   }
 
   @Get('/test')
