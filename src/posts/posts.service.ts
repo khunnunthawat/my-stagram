@@ -11,6 +11,7 @@ export class PostsService {
     @InjectRepository(PostsRepository)
     private postsRepository: PostsRepository,
   ) {}
+
   async createPosts(
     createPostsDto: CreatePostsDto,
     user: UserEntity,
@@ -19,8 +20,29 @@ export class PostsService {
     return await this.postsRepository.createPost(createPostsDto, user, file);
   }
 
-  getPost(): Promise<PostsEntity[]> {
-    return this.postsRepository.find();
+  // getPost(): Promise<PostsEntity[]> {
+  //   return this.postsRepository.find();
+  // }
+
+  async getPost(): Promise<PostsEntity[]> {
+    const getpost = await this.postsRepository
+      .createQueryBuilder('post') //เรียกใช้ table post
+      .leftJoinAndSelect('post.user', 'user') //
+      .leftJoinAndSelect('post.comments', 'comment')
+      .leftJoinAndSelect('comment.user', 'commentedUser')
+      .select([
+        'post',
+        'user.id',
+        'user.username',
+        'comment',
+        'commentedUser.username',
+        'commentedUser.id',
+      ])
+      .orderBy('post.updated', 'DESC') //เรียงโพสต์ DESC = มากไปหน่อย ASC น้อยไปมาก
+      .getMany(); // get ค่าทั้งหมด
+    // Post.map((comment) => {
+    // })
+    return getpost;
   }
 
   async getPostById(id: number, user: UserEntity): Promise<PostsEntity> {

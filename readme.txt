@@ -25,6 +25,7 @@
   npm i fs-extra
   npm i multer
   npm i -D @types/multer
+  npm i --save @nestjs/serve-static
 
   nest create :
   nest g module user --no-spec

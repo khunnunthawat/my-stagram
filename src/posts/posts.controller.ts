@@ -43,7 +43,7 @@ export class PostsController {
   }
 
   // Get_Post
-  @Get('/get')
+  @Get()
   getPosts(): Promise<PostsEntity[]> {
     return this.postsService.getPost();
   }
