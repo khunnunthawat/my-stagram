@@ -57,7 +57,7 @@ export class PostsController {
   }
 
   // Update_Post
-  @Patch('edit/:post_id')
+  @Patch('/:post_id/edit')
   async UpdatePostById(
     @Param('post_id') id: number,
     @Body('desc') desc: string,
