@@ -26,7 +26,7 @@ export class PostsController {
   constructor(private postsService: PostsService) {}
 
   // Create_Posts
-  @Post('/new')
+  @Post()
   @UseInterceptors(FileInterceptor('image'))
   @UsePipes(ValidationPipe)
   async addPosts(
